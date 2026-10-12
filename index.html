@@ -1,0 +1,1169 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>শারদোৎসব ২০২৬ - হাতের লেখা শৈলীতে দুর্গাপূজা</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atma:wght@300;400;500;600;700&family=Galada&family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cherry: {
+              950: '#2A0206',
+              900: '#42030A',
+              850: '#54050E',
+              800: '#6E0814',
+              700: '#8A0C1B',
+              600: '#A81324',
+            },
+            festiveGold: '#FFD700',
+            warmGold: '#F6C343',
+            amberGlow: '#F59E0B',
+            sindoorRed: '#E11D48',
+          },
+          fontFamily: {
+            // Handwritten Bengali font choices
+            hand: ['"Atma"', 'cursive', 'sans-serif'],
+            script: ['"Galada"', 'cursive', 'serif'],
+            regular: ['"Hind Siliguri"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      font-family: 'Atma', cursive, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 20%, #660813 0%, #46030B 40%, #2A0105 100%);
+      color: #FFF6EC;
+      font-family: 'Atma', cursive, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Traditional Alpona / Swarnarekha Borders */
+    .alpona-card {
+      border: 2px dashed #FFD700;
+      border-radius: 1.5rem;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.18), inset 0 0 15px rgba(255, 215, 0, 0.08);
+      position: relative;
+    }
+
+    .alpona-card::before, .alpona-card::after {
+      content: "❀";
+      position: absolute;
+      color: #FFD700;
+      font-size: 1.1rem;
+    }
+    .alpona-card::before { top: 6px; left: 10px; }
+    .alpona-card::after { top: 6px; right: 10px; }
+
+    .gold-handwritten {
+      text-shadow: 1px 2px 8px rgba(255, 215, 0, 0.45);
+    }
+
+    /* Organic Handwritten Notes Style */
+    .paper-note {
+      background: linear-gradient(135deg, rgba(84, 5, 14, 0.95), rgba(42, 2, 6, 0.95));
+      border: 1.5px solid rgba(255, 215, 0, 0.35);
+      border-radius: 1.25rem;
+      transition: all 0.3s ease;
+    }
+    .paper-note:hover {
+      border-color: #FFD700;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 215, 0, 0.15);
+    }
+
+    /* Pulsing Countdown aura */
+    @keyframes festivalPulse {
+      0%, 100% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.25); }
+      50% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.55); }
+    }
+    .countdown-box {
+      animation: festivalPulse 3.5s infinite ease-in-out;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #2A0206;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #FFD700;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="relative text-base selection:bg-festiveGold selection:text-cherry-950">
+
+  <!-- Background Animated Kashphul & Sparkles Canvas -->
+  <canvas id="kashCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-35"></canvas>
+
+  <header class="sticky top-0 z-40 bg-cherry-950/90 backdrop-blur-md border-b border-festiveGold/30 shadow-xl">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-full border-2 border-festiveGold flex items-center justify-center bg-cherry-800 text-festiveGold shadow-md transform -rotate-3">
+          <i class="fa-solid fa-om text-2xl"></i>
+        </div>
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-script text-festiveGold leading-none gold-handwritten">
+            শারদোৎসব ২০২৬
+          </h1>
+          <p class="text-xs sm:text-sm font-hand text-amber-200/90 tracking-wide">
+            শ্রীশ্রী দুর্গোৎসব ও আগমনী মহোৎসব
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <a href="#pandals-area" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full border border-festiveGold/50 text-xs font-hand text-amber-200 hover:bg-festiveGold/20 transition">
+          <i class="fa-solid fa-wand-magic-sparkles text-festiveGold"></i> সেরা ২০ পুজো
+        </a>
+        <button id="adminToggleBtn" onclick="toggleAdminPinMode()" class="px-3 py-1 rounded-full text-xs font-hand bg-cherry-800 border border-festiveGold/40 text-festiveGold hover:bg-festiveGold hover:text-cherry-950 transition flex items-center gap-1" title="এডমিন পিন মোড পরিবর্তন">
+          <i class="fa-solid fa-thumbtack"></i>
+          <span id="adminModeLabel">ইউজার মোড</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative z-10 max-w-4xl mx-auto px-4 py-8 space-y-12 sm:space-y-14">
+
+    <!-- Hero Card: handwritten blessings & bln.jpg -->
+    <section class="text-center space-y-4">
+      <div class="inline-block px-5 py-1.5 rounded-full bg-cherry-900/80 border border-festiveGold/50 text-festiveGold text-sm sm:text-base font-hand gold-handwritten shadow">
+        🌸 "বাজলো তোমার আলোর বেণু, মাতলো রে ভুবন..." 🌸
+      </div>
+
+      <!-- Image 1 slot: bln.jpg -->
+      <div class="alpona-card p-3 sm:p-4 bg-gradient-to-b from-cherry-900 to-cherry-950 shadow-2xl">
+        <div class="relative w-full h-56 sm:h-72 md:h-96 rounded-2xl overflow-hidden bg-cherry-950 border border-festiveGold/30 flex items-center justify-center">
+          <img 
+            id="imgBln"
+            src="bln.jpg" 
+            alt="মা দুর্গার আগমন ও বোধন" 
+            class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+            onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1601614749320-f42111cbbdca?auto=format&fit=crop&w=1200&q=80';"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-cherry-950/95 via-transparent to-black/25 pointer-events-none"></div>
+          <div class="absolute bottom-3 left-4 right-4 text-left pointer-events-none">
+            <span class="text-xs uppercase tracking-wider text-festiveGold font-script">Sharodiya Prem</span>
+            <h2 class="text-xl sm:text-3xl font-hand font-bold text-white drop-shadow">
+              কাশফুলের মেলা আর শিউলি ঝরা ভোর—মা আসছেন ঘরে!
+            </h2>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Countdown 1: ষষ্ঠীর অপেক্ষায় (Maha Sasthi 2026 Countdown) -->
+    <section class="alpona-card countdown-box p-6 sm:p-8 bg-gradient-to-br from-cherry-850 via-cherry-900 to-cherry-950 text-center space-y-4">
+      <div class="space-y-1">
+        <div class="flex items-center justify-center gap-2 text-festiveGold text-base sm:text-lg font-hand">
+          <i class="fa-solid fa-feather"></i>
+          <span>দেবীপক্ষের সূচনা ও বোধন</span>
+          <i class="fa-solid fa-feather"></i>
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-script text-festiveGold gold-handwritten">
+          ষষ্ঠীর অপেক্ষায়...
+        </h2>
+        <p class="text-sm sm:text-base font-hand text-amber-200/90">
+          টার্গেট: ১৬ই অক্টোবর ২০২৬, রাত ১২:০০ AM (০০:০০:০০)
+        </p>
+      </div>
+
+      <!-- Handwritten Countdown Display Blocks -->
+      <div class="grid grid-cols-4 gap-2.5 sm:gap-4 max-w-lg mx-auto pt-2">
+        <div class="bg-cherry-950/90 border border-festiveGold/50 rounded-2xl p-2 sm:p-3 shadow-inner transform -rotate-1">
+          <span id="sasthiDays" class="block text-3xl sm:text-5xl font-bold font-hand text-festiveGold">00</span>
+          <span class="text-xs sm:text-sm font-hand text-amber-200/80">দিন</span>
+        </div>
+        <div class="bg-cherry-950/90 border border-festiveGold/50 rounded-2xl p-2 sm:p-3 shadow-inner transform rotate-1">
+          <span id="sasthiHours" class="block text-3xl sm:text-5xl font-bold font-hand text-festiveGold">00</span>
+          <span class="text-xs sm:text-sm font-hand text-amber-200/80">ঘণ্টা</span>
+        </div>
+        <div class="bg-cherry-950/90 border border-festiveGold/50 rounded-2xl p-2 sm:p-3 shadow-inner transform -rotate-1">
+          <span id="sasthiMinutes" class="block text-3xl sm:text-5xl font-bold font-hand text-festiveGold">00</span>
+          <span class="text-xs sm:text-sm font-hand text-amber-200/80">মিনিট</span>
+        </div>
+        <div class="bg-cherry-950/90 border border-festiveGold/50 rounded-2xl p-2 sm:p-3 shadow-inner transform rotate-1">
+          <span id="sasthiSeconds" class="block text-3xl sm:text-5xl font-bold font-hand text-festiveGold">00</span>
+          <span class="text-xs sm:text-sm font-hand text-amber-200/80">সেকেন্ড</span>
+        </div>
+      </div>
+
+      <div id="sasthiBadge" class="inline-block mt-3 px-4 py-1 rounded-full bg-cherry-950/80 border border-festiveGold/30 text-xs sm:text-sm font-hand text-amber-100">
+        <i class="fa-regular fa-clock text-festiveGold mr-1"></i> লাইভ ঘড়ি চলছে... মহাষষ্ঠীর আনন্দ আর মাত্র কয়েক কদম দূরে!
+      </div>
+    </section>
+
+    <!-- Image 2 slot: bp.jpg -->
+    <section class="text-center">
+      <div class="alpona-card p-3 sm:p-4 bg-gradient-to-b from-cherry-900 to-cherry-950 shadow-2xl">
+        <div class="relative w-full h-52 sm:h-64 md:h-80 rounded-2xl overflow-hidden bg-cherry-950 border border-festiveGold/30 flex items-center justify-center">
+          <img 
+            id="imgBp"
+            src="bp.jpg" 
+            alt="মণ্ডপের আলোকসজ্জা ও ঠাকুর দেখা" 
+            class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+            onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1570783309194-4d2bc506fc4b?auto=format&fit=crop&w=1200&q=80';"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-cherry-950/95 via-transparent to-black/30 pointer-events-none"></div>
+          <div class="absolute bottom-3 left-4 right-4 text-left pointer-events-none">
+            <span class="text-xs uppercase tracking-wider text-festiveGold font-script">Pandal Porikroma</span>
+            <h3 class="text-lg sm:text-2xl font-hand font-bold text-white drop-shadow">
+              প্যান্ডেলে প্যান্ডেলে জনসমুদ্র আর আলোর জাদুকরী রোশনাই
+            </h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Countdown 2: বিজয়ার টেনশন মন খারাপ কিসের এখনও বাকি (Dashami 2026 Countdown) -->
+    <section class="alpona-card p-6 sm:p-8 bg-gradient-to-br from-cherry-950 via-cherry-900 to-cherry-850 text-center space-y-4">
+      <div class="space-y-1">
+        <div class="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-sindoorRed/30 border border-sindoorRed text-red-200 text-xs sm:text-sm font-hand">
+          <i class="fa-solid fa-heart-crack text-sindoorRed"></i> সিঁদুর খেলা ও বিসর্জনের ক্ষণ
+        </div>
+        <h2 class="text-2xl sm:text-4xl md:text-5xl font-script text-festiveGold gold-handwritten leading-tight">
+          বিজয়ার টেনশন? মন খারাপ কিসের, এখনও বাকি :-
+        </h2>
+        <p class="text-sm sm:text-base font-hand text-amber-200/90">
+          দশমী অবধি টাইমার: ২১শে অক্টোবর ২০২৬, দুপুর ০১:০০ PM (০০:০০:০০)
+        </p>
+      </div>
+
+      <!-- Dashami Countdown Blocks -->
+      <div class="grid grid-cols-4 gap-2.5 sm:gap-4 max-w-lg mx-auto pt-2">
+        <div class="bg-cherry-950/90 border border-sindoorRed/50 rounded-2xl p-2 sm:p-3 shadow-inner transform rotate-1">
+          <span id="dashamiDays" class="block text-3xl sm:text-5xl font-bold font-hand text-festiveGold">00</span>
+          <span class="text-xs sm:text-sm font-hand text-amber-200/80">দিন</span>
+        </div>
+        <div class="bg-cherry-950/90 border border-sindoorRed/50 rounded-2xl p-2 sm:p-3 shadow-inner transform -rotate-1">
+          <span id="dashamiHours" class="block text-3xl sm:text-5xl font-bold font-hand text-festiveGold">00</span>
+          <span class="text-xs sm:text-sm font-hand text-amber-200/80">ঘণ্টা</span>
+        </div>
+        <div class="bg-cherry-950/90 border border-sindoorRed/50 rounded-2xl p-2 sm:p-3 shadow-inner transform rotate-1">
+          <span id="dashamiMinutes" class="block text-3xl sm:text-5xl font-bold font-hand text-festiveGold">00</span>
+          <span class="text-xs sm:text-sm font-hand text-amber-200/80">মিনিট</span>
+        </div>
+        <div class="bg-cherry-950/90 border border-sindoorRed/50 rounded-2xl p-2 sm:p-3 shadow-inner transform -rotate-1">
+          <span id="dashamiSeconds" class="block text-3xl sm:text-5xl font-bold font-hand text-festiveGold">00</span>
+          <span class="text-xs sm:text-sm font-hand text-amber-200/80">সেকেন্ড</span>
+        </div>
+      </div>
+
+      <div id="dashamiBadge" class="inline-block mt-3 px-4 py-1 rounded-full bg-cherry-950/80 border border-festiveGold/30 text-xs sm:text-sm font-hand text-amber-100">
+        <i class="fa-solid fa-bell text-festiveGold mr-1"></i> উৎসবের প্রতিটি রাত-দিন প্রাণভরে উপভোগ করুন!
+      </div>
+    </section>
+
+    <!-- Top 20 Durga Pujas Section -->
+    <section id="pandals-area" class="space-y-6 pt-4">
+      <div class="text-center space-y-2">
+        <span class="text-xs sm:text-sm font-script text-festiveGold uppercase tracking-widest">
+          ❀ পরিক্রমা ডায়েরি ❀
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-script text-festiveGold gold-handwritten">
+          পশ্চিমবঙ্গের সেরা ২০টি দুর্গাপূজা
+        </h2>
+        <p class="text-sm sm:text-base font-hand text-amber-200/90 max-w-2xl mx-auto">
+          নাম, সাবেকিয়ানা ও থিমের বিবরণ এবং জেলা/অবস্থান সমেত আপনার মনের মতো পুজো গাইড
+        </p>
+      </div>
+
+      <!-- Search bar & Filter pills in handwritten feel -->
+      <div class="p-3 sm:p-4 rounded-2xl bg-cherry-900/70 border border-festiveGold/30 flex flex-col md:flex-row gap-3 items-center justify-between">
+        <div class="relative w-full md:w-72">
+          <i class="fa-solid fa-pen-nib absolute left-3 top-1/2 -translate-y-1/2 text-festiveGold text-sm"></i>
+          <input 
+            type="text" 
+            id="pandalSearchInput" 
+            placeholder="হাতের লেখায় খুঁজুন (নাম বা এলাকা)..." 
+            oninput="handlePandalSearch()"
+            class="w-full bg-cherry-950/90 text-white font-hand text-sm pl-9 pr-3 py-2 rounded-xl border border-festiveGold/40 focus:outline-none focus:border-festiveGold placeholder:text-amber-200/40"
+          >
+        </div>
+
+        <div class="flex flex-wrap gap-1.5 justify-center md:justify-end w-full md:w-auto">
+          <button onclick="applyZoneFilter('all')" class="zone-pill active px-3 py-1 rounded-lg text-xs font-hand bg-festiveGold text-cherry-950 font-bold border border-festiveGold" data-zone="all">সব পুজো</button>
+          <button onclick="applyZoneFilter('North')" class="zone-pill px-3 py-1 rounded-lg text-xs font-hand bg-cherry-950 text-amber-200 border border-festiveGold/40 hover:bg-cherry-800" data-zone="North">উত্তর কলকাতা</button>
+          <button onclick="applyZoneFilter('South')" class="zone-pill px-3 py-1 rounded-lg text-xs font-hand bg-cherry-950 text-amber-200 border border-festiveGold/40 hover:bg-cherry-800" data-zone="South">দক্ষিণ কলকাতা</button>
+          <button onclick="applyZoneFilter('East')" class="zone-pill px-3 py-1 rounded-lg text-xs font-hand bg-cherry-950 text-amber-200 border border-festiveGold/40 hover:bg-cherry-800" data-zone="East">সল্টলেক/পূর্ব</button>
+          <button onclick="applyZoneFilter('Districts')" class="zone-pill px-3 py-1 rounded-lg text-xs font-hand bg-cherry-950 text-amber-200 border border-festiveGold/40 hover:bg-cherry-800" data-zone="Districts">জেলা সমূহ</button>
+        </div>
+      </div>
+
+      <!-- Pandals Dynamic Cards Grid -->
+      <div id="pandalsListContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Injected dynamically by JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Floating Action Buttons: Dhak & Comment Box -->
+  <div class="fixed bottom-5 right-5 z-50 flex flex-col gap-3">
+    <!-- Floating Dhak sound button -->
+    <button 
+      id="floatingDhakBtn"
+      onclick="toggleDhakSystem()" 
+      class="w-14 h-14 rounded-full bg-gradient-to-tr from-amber-400 via-festiveGold to-amber-200 text-cherry-950 shadow-2xl flex items-center justify-center text-xl transition transform hover:scale-110 active:scale-95 border-2 border-white ring-4 ring-cherry-800/80 group"
+      title="ঢাকের আওয়াজ বাজান (Dhak Sound)"
+    >
+      <i id="dhakBtnIcon" class="fa-solid fa-music group-hover:rotate-12 transition"></i>
+    </button>
+
+    <!-- Floating Comment button -->
+    <button 
+      onclick="toggleCommentSidePanel()" 
+      class="w-14 h-14 rounded-full bg-gradient-to-tr from-cherry-700 via-sindoorRed to-cherry-900 text-festiveGold shadow-2xl flex items-center justify-center text-xl transition transform hover:scale-110 active:scale-95 border-2 border-festiveGold ring-4 ring-cherry-950/80 relative"
+      title="হাতের লেখায় মন্তব্য খাতা"
+    >
+      <i class="fa-solid fa-pen-fancy"></i>
+      <span id="commentCountBadge" class="absolute -top-1 -right-1 bg-festiveGold text-cherry-950 font-bold font-hand text-xs w-5 h-5 rounded-full flex items-center justify-center border border-cherry-900">
+        0
+      </span>
+    </button>
+  </div>
+
+  <!-- Dhak Modal with image bpo.jpg -->
+  <div id="dhakBackdropModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+    <div class="relative alpona-card max-w-lg w-full p-5 sm:p-6 bg-gradient-to-br from-cherry-900 via-cherry-950 to-black text-center space-y-4 shadow-2xl">
+      <!-- Close button -->
+      <button onclick="closeDhakModal()" class="absolute top-4 right-4 text-amber-200 hover:text-festiveGold text-xl">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="inline-flex items-center gap-2 text-festiveGold font-script text-base sm:text-lg">
+        <i class="fa-solid fa-drum animate-bounce text-festiveGold"></i> ঢাকের বাদ্যি ও ধুনুচি নাচ
+      </div>
+
+      <h3 class="text-2xl sm:text-4xl font-script text-festiveGold gold-handwritten">
+        "বলো দুর্গা মাঈ কি — জয়!"
+      </h3>
+
+      <!-- Image 3 slot: bpo.jpg -->
+      <div class="relative rounded-2xl overflow-hidden border-2 border-festiveGold/40 h-56 sm:h-64 bg-black/60 shadow-inner group">
+        <img 
+          id="imgBpo"
+          src="bpo.jpg" 
+          alt="Dhak and Dhunuchi Dance" 
+          class="w-full h-full object-cover transition duration-700 group-hover:scale-105"
+          onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1570783309194-4d2bc506fc4b?auto=format&fit=crop&w=800&q=80';"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-cherry-950/90 via-transparent to-black/30 pointer-events-none"></div>
+        <div class="absolute bottom-2 left-0 right-0 text-center pointer-events-none">
+          <p class="text-xs sm:text-sm text-amber-100 font-hand px-3 drop-shadow">
+            ঢাকের কাঠি আর কাঁসর ঘণ্টার রোমাঞ্চকর সুরে শারদ আমেজ
+          </p>
+        </div>
+      </div>
+
+      <!-- Play / Pause Controller -->
+      <div class="bg-cherry-950/90 rounded-2xl p-3 border border-festiveGold/30 flex items-center justify-between px-4">
+        <div class="flex items-center gap-3 text-left">
+          <div class="w-10 h-10 rounded-full bg-festiveGold text-cherry-950 flex items-center justify-center text-lg animate-spin" style="animation-duration: 5s;">
+            <i class="fa-solid fa-compact-disc"></i>
+          </div>
+          <div>
+            <p class="text-xs font-bold font-hand text-festiveGold">ঐতিহ্যবাহী ঢাকের বোল</p>
+            <p class="text-[11px] font-hand text-amber-200/80">তাং তা কুড় কুড় তাং ধিং তাং...</p>
+          </div>
+        </div>
+        <button id="dhakModalPlayBtn" onclick="toggleDhakSystem()" class="px-4 py-1.5 rounded-full text-xs font-hand font-bold bg-festiveGold text-cherry-950 hover:bg-amber-300 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-pause"></i> থামান
+        </button>
+      </div>
+
+      <p class="text-[11px] font-hand text-amber-200/60">
+        *ওয়েব অডিও সিন্থেসাইজার এবং স্থানীয় dhak.mp3 সাপোর্টে সরাসরি সুর তৈরি হচ্ছে।
+      </p>
+    </div>
+  </div>
+
+  <!-- Comments Drawer (হাতের লেখায় মন্তব্য খাতা) -->
+  <div id="commentSideDrawer" class="fixed inset-y-0 right-0 w-full sm:w-[420px] bg-gradient-to-b from-cherry-900 via-cherry-950 to-black z-50 shadow-2xl border-l-2 border-festiveGold/40 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col font-hand">
+    
+    <!-- Header -->
+    <div class="p-4 border-b border-festiveGold/20 flex items-center justify-between bg-cherry-950/80">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-pen-nib text-festiveGold"></i>
+        <h3 class="font-bold font-script text-festiveGold text-xl gold-handwritten">
+          দর্শকদের মন্তব্য খাতা
+        </h3>
+      </div>
+      <button onclick="toggleCommentSidePanel()" class="text-amber-200 hover:text-white text-xl p-1">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Submit Comment Form -->
+    <div class="p-4 border-b border-festiveGold/20 bg-cherry-900/40 space-y-2.5">
+      <input 
+        type="text" 
+        id="commentWriterName" 
+        placeholder="আপনার নাম লিখুন..." 
+        class="w-full bg-cherry-950/90 text-white font-hand text-sm px-3 py-2 rounded-xl border border-festiveGold/30 focus:outline-none focus:border-festiveGold placeholder:text-amber-200/40"
+      />
+      <textarea 
+        id="commentMessageBody" 
+        rows="2" 
+        placeholder="শারদীয়া শুভেচ্ছা বা কোনো কথা লিখুন..." 
+        class="w-full bg-cherry-950/90 text-white font-hand text-sm px-3 py-2 rounded-xl border border-festiveGold/30 focus:outline-none focus:border-festiveGold placeholder:text-amber-200/40 resize-none"
+      ></textarea>
+      
+      <div class="flex justify-between items-center pt-1">
+        <span class="text-[11px] text-amber-200/60">
+          *নিজের মন্তব্য এডিট ও অন্যদের লাইক/ডিসলাইক করুন
+        </span>
+        <button 
+          id="postCommentBtn"
+          onclick="submitCommentEntry()" 
+          class="px-4 py-1.5 rounded-xl bg-festiveGold text-cherry-950 text-xs font-bold font-hand hover:bg-amber-300 transition shadow"
+        >
+          লিখে ফেলুন
+        </button>
+      </div>
+    </div>
+
+    <!-- Comments List -->
+    <div id="commentsListView" class="flex-1 overflow-y-auto p-4 space-y-3">
+      <!-- Injected by JavaScript -->
+    </div>
+  </div>
+
+  <!-- Audio element fallback for dhak.mp3 -->
+  <audio id="localDhakAudio" src="dhak.mp3" preload="none" loop></audio>
+
+  <script>
+    /* ==========================================================================
+       1. Top 20 Durga Puja Pandals List (West Bengal)
+       ========================================================================== */
+    const TOP_20_PUJAS = [
+      {
+        id: 1,
+        name: "১. বাগবাজার সার্বজনীন দুর্গোৎসব",
+        zone: "North",
+        zoneText: "উত্তর কলকাতা",
+        location: "বাগবাজার ঘাট, উত্তর কলকাতা",
+        bibiron: "শতবর্ষের খাঁটি ডাকের সাজ ও সনাতনী একচালা প্রতিমার রূপ। সাবেকিয়ানার শ্রেষ্ঠ ঠিকানা।",
+        specialty: "ঐতিহ্যবাহী একচালা ও অষ্টমীর অঞ্জলি",
+        mapLocation: "Bagbazar Sarbojanin Durgotsav, Kolkata"
+      },
+      {
+        id: 2,
+        name: "২. কুমারটুলি পার্ক সার্বজনীন",
+        zone: "North",
+        zoneText: "উত্তর কলকাতা",
+        location: "কুমারটুলি, উত্তর কলকাতা",
+        bibiron: "মৃৎশিল্পীদের আঁতুড়ঘরে তাক লাগানো শৈল্পিক মণ্ডপ ও দৃষ্টিনন্দন প্রতিমা শৈলী।",
+        specialty: "মৃৎশিল্পের অনন্য সৃজনশীলতা",
+        mapLocation: "Kumartuli Park Sarbojanin, Kolkata"
+      },
+      {
+        id: 3,
+        name: "৩. কলেজ স্কয়ার সর্বজনীন",
+        zone: "North",
+        zoneText: "উত্তর কলকাতা",
+        location: "কলেজ স্ট্রিট, মধ্য/উত্তর কলকাতা",
+        bibiron: "চন্দননগরের নজরকাড়া আলোর রোশনাই ও দীঘির জলে মায়াবী প্রাসাদের প্রতিফলন।",
+        specialty: "জলের ওপর আলোর রাজপ্রাসাদ",
+        mapLocation: "College Square Durga Puja, Kolkata"
+      },
+      {
+        id: 4,
+        name: "৪. মহম্মদ আলী পার্ক",
+        zone: "North",
+        zoneText: "উত্তর কলকাতা",
+        location: "এম জি রোড সংলগ্ন, সেন্ট্রাল কলকাতা",
+        bibiron: "বিশাল ঐতিহাসিক প্রাচীন দুর্গ ও মন্দিরের আদলে মণ্ডপ এবং রাজকীয় প্রতিমা।",
+        specialty: "ঐতিহাসিক রাজকীয় স্থাপত্য",
+        mapLocation: "Mohammad Ali Park Durga Puja, Kolkata"
+      },
+      {
+        id: 5,
+        name: "৫. সন্তোষ মিত্র স্কয়ার",
+        zone: "North",
+        zoneText: "উত্তর কলকাতা",
+        location: "লেবুতলা, বউবাজার",
+        bibiron: "লেজার শো, অযোধ্যা রামমন্দির ও আধুনিক স্ফিয়ার থিমের মতো আন্তর্জাতিক মানের মহাবিস্ময়।",
+        specialty: "হাই-টেক থিম ও উপচে পড়া ভিড়",
+        mapLocation: "Santosh Mitra Square Durga Puja, Kolkata"
+      },
+      {
+        id: 6,
+        name: "৬. শোভাবাজার রাজবাড়ি",
+        zone: "North",
+        zoneText: "উত্তর কলকাতা",
+        location: "শোভাবাজার, উত্তর কলকাতা",
+        bibiron: "১৭৫৭ সালে রাজা নবকৃষ্ণ দেবের শুরু করা বনেদি বাড়ির পুজো। নাটমন্দিরের আবেগ।",
+        specialty: "১৭৫৭ সালের বনেদি আভিজাত্য",
+        mapLocation: "Sovabazar Rajbari, Kolkata"
+      },
+      {
+        id: 7,
+        name: "৭. একডালিয়া এভারগ্রীন ক্লাব",
+        zone: "South",
+        zoneText: "দক্ষিণ কলকাতা",
+        location: "গড়িয়াহাট, দক্ষিণ কলকাতা",
+        bibiron: "ভারতের সুপ্রাচীন মন্দির স্থাপত্যের নিখুঁত রূপ ও উজ্জ্বল সোনালী সনাতনী মাতৃরূপ।",
+        specialty: "প্রাচীন মন্দির স্থাপত্য ও প্রতিমা",
+        mapLocation: "Ekdalia Evergreen Club, Kolkata"
+      },
+      {
+        id: 8,
+        name: "৮. সিংঘী পার্ক সর্বজনীন",
+        zone: "South",
+        zoneText: "দক্ষিণ কলকাতা",
+        location: "ডোভার লেন, বালিগঞ্জ",
+        bibiron: "আট দশকের বেশি সময়ের বনেদি স্বাদ এবং সূক্ষ্ম হস্তশিল্প নির্ভর মণ্ডপ সজ্জা।",
+        specialty: "হস্তশিল্পের নিখুঁত কাজ",
+        mapLocation: "Singhi Park Sarbojanin Durga Puja, Kolkata"
+      },
+      {
+        id: 9,
+        name: "৯. সুরুচি সংঘ",
+        zone: "South",
+        zoneText: "দক্ষিণ কলকাতা",
+        location: "নিউ আলিপুর, দক্ষিণ কলকাতা",
+        bibiron: "ভারতের বিভিন্ন প্রান্তের সংস্কৃতি ও লোকশিল্প নিয়ে সামাজিক বার্তা দেওয়া মননশীল থিম।",
+        specialty: "সাংস্কৃতিক ঐক্য ও বিশেষ গান",
+        mapLocation: "Suruchi Sangha, New Alipore, Kolkata"
+      },
+      {
+        id: 10,
+        name: "১০. ম্যাডক্স স্কয়ার",
+        zone: "South",
+        zoneText: "দক্ষিণ কলকাতা",
+        location: "রিচি রোড, বালিগঞ্জ",
+        bibiron: "বাঙালির পুজোর সেরা আড্ডার উন্মুক্ত প্রাঙ্গণ এবং সাবেকিয়ানা প্রতিমার দর্শন।",
+        specialty: "তারুণ্যের বাঁধভাঙা আড্ডা",
+        mapLocation: "Maddox Square, Kolkata"
+      },
+      {
+        id: 11,
+        name: "১১. ত্রিধারা সম্মিলনী",
+        zone: "South",
+        zoneText: "দক্ষিণ কলকাতা",
+        location: "মনোহরপুকুর রোড, দক্ষিণ কলকাতা",
+        bibiron: "আধুনিক শিল্পের গভীর ভাবনা, আবহসঙ্গীত এবং অভিনব প্রতিমা ভাবনার রসায়ন।",
+        specialty: "ভাবগম্ভীর সমকালীন শিল্প",
+        mapLocation: "Tridhara Sammilani, Kolkata"
+      },
+      {
+        id: 12,
+        name: "১২. চেতলা অগ্রণী ক্লাব",
+        zone: "South",
+        zoneText: "দক্ষিণ কলকাতা",
+        location: "চেতলা, দক্ষিণ কলকাতা",
+        bibiron: "পরিবেশবান্ধব ও সুপ্রাচীন শিল্পকলা নির্ভর নিখুঁত নকশা ও অন্তরের শৈল্পিক ছোঁয়া।",
+        specialty: "পরিবেশবান্ধব সূক্ষ্ম শিল্প",
+        mapLocation: "Chetla Agrani Club, Kolkata"
+      },
+      {
+        id: 13,
+        name: "১৩. মুদিয়ালী ক্লাব",
+        zone: "South",
+        zoneText: "দক্ষিণ কলকাতা",
+        location: "কালীঘাট / সাদার্ন অ্যাভিনিউ",
+        bibiron: "নজরকাড়া রঙের বিন্যাস, চমৎকার জ্যামিতিক নকশা এবং চোখ জুড়ানো শান্ত পরিবেশ।",
+        specialty: "রঙের জাদু ও ঐতিহ্য",
+        mapLocation: "Mudiali Club Durga Puja, Kolkata"
+      },
+      {
+        id: 14,
+        name: "১৪. শিব মন্দির সর্বজনীন",
+        zone: "South",
+        zoneText: "দক্ষিণ কলকাতা",
+        location: "লেক টেম্পল রোড, দক্ষিণ কলকাতা",
+        bibiron: "লেক সংলগ্ন শান্ত পরিবেশ এবং সৃষ্টিশীল সমসাময়িক থিম উপস্থাপনার এক উজ্জ্বল নিদর্শন।",
+        specialty: "মননশীল শিল্প উপস্থাপনা",
+        mapLocation: "Shiv Mandir Sarbojanin Durgotsab, Kolkata"
+      },
+      {
+        id: 15,
+        name: "১৫. শ্রীভূমি স্পোর্টিং ক্লাব",
+        zone: "East",
+        zoneText: "সল্টলেক/পূর্ব",
+        location: "ভিআইপি রোড, লেক টাউন",
+        bibiron: "বুর্জ খলিফা, ভ্যাটিকান সিটি ও রাজপ্রাসাদের আদলে গগনচুম্বী তাক লাগানো মেগা মণ্ডপ।",
+        specialty: "বিশাল বাজেট ও রাজকীয় আলো",
+        mapLocation: "Sreebhumi Sporting Club, VIP Road, Kolkata"
+      },
+      {
+        id: 16,
+        name: "১৬. এফডি ব্লক সল্টলেক",
+        zone: "East",
+        zoneText: "সল্টলেক/পূর্ব",
+        location: "সল্টলেক সেক্টর ৩, কলকাতা",
+        bibiron: "বিশাল বিস্তৃত প্রাঙ্গণে কাল্পনিক মায়ানগরী ও সামাজিক রূপকের নিখুঁত রূপায়ণ।",
+        specialty: "বিস্তৃত মেলা প্রাঙ্গণ ও থিম",
+        mapLocation: "FD Block Durga Puja, Salt Lake, Kolkata"
+      },
+      {
+        id: 17,
+        name: "১৭. বেহালা নতুন দল / বরিষা ক্লাব",
+        zone: "South",
+        zoneText: "দক্ষিণ কলকাতা",
+        location: "বরিষা / বেহালা",
+        bibiron: "বাস্তব সামাজিক সমস্যা, পরিযায়ী শ্রমিক ও মায়ের স্নেহময় রূপ নিয়ে চর্চিত পুজো।",
+        specialty: "হৃদয়স্পর্শী সামাজিক বার্তা",
+        mapLocation: "Barisha Club Durga Puja, Kolkata"
+      },
+      {
+        id: 18,
+        name: "১৮. কল্যাণী আইটিআই মোড়",
+        zone: "Districts",
+        zoneText: "নদিয়া জেলা",
+        location: "আইটিআই মোড়, কল্যাণী, নদিয়া",
+        bibiron: "মালয়েশিয়ার টুইন টাওয়ার বা গ্র্যান্ড প্যালেসের মতো মেগা স্থাপত্যে রেকর্ড ভিড়।",
+        specialty: "জেলার মেগা আকর্ষণ",
+        mapLocation: "Kalyani ITI More Durga Puja, Nadia"
+      },
+      {
+        id: 19,
+        name: "১৯. শিলিগুড়ি রবীন্দ্র সংহতি",
+        zone: "Districts",
+        zoneText: "উত্তরবঙ্গ",
+        location: "শিলিগুড়ি, উত্তরবঙ্গ",
+        bibiron: "উত্তরবঙ্গের সবচেয়ে জনপ্রিয় পুজো। নজরকাড়া আলোকসজ্জা ও তরাই-ডুয়ার্সের সংস্কৃতি সমন্বয়।",
+        specialty: "উত্তরবঙ্গের মেগা উৎসব",
+        mapLocation: "Siliguri Rabindra Sanghati Durga Puja"
+      },
+      {
+        id: 20,
+        name: "২০. জলপাইগুড়ি বাবুপাড়া দুর্গোৎসব",
+        zone: "Districts",
+        zoneText: "উত্তরবঙ্গ",
+        location: "বাবুপাড়া, জলপাইগুড়ি",
+        bibiron: "ঐতিহ্য ও সমকালীন সৃষ্টিশীল ভাবনার চমৎকার মেলবন্ধন।",
+        specialty: "ঐতিহ্যবাহী জেলা পুজো",
+        mapLocation: "Babupara Durga Puja, Jalpaiguri"
+      }
+    ];
+
+    /* ==========================================================================
+       2. Dual Countdown Timers (Sasthi 2026 & Dashami 2026)
+       ========================================================================== */
+    // Target 1: Maha Sasthi - October 16, 2026 at 12:00:00 AM (00:00:00)
+    const TARGET_SASTHI = new Date('2026-10-16T00:00:00').getTime();
+
+    // Target 2: Bijoya Dashami - October 21, 2026 at 1:00:00 PM (13:00:00)
+    const TARGET_DASHAMI = new Date('2026-10-21T13:00:00').getTime();
+
+    // Bengali Digits Converter for natural handwriting look
+    const banglaDigits = {'0':'০', '1':'১', '2':'২', '3':'৩', '4':'৪', '5':'৫', '6':'৬', '7':'৭', '8':'৮', '9':'৯'};
+    function toBengaliNumber(n) {
+      const str = String(n).padStart(2, '0');
+      return str.split('').map(char => banglaDigits[char] || char).join('');
+    }
+
+    function runCountdownTick() {
+      const currentTime = new Date().getTime();
+
+      // Sasthi
+      const sasthiDelta = TARGET_SASTHI - currentTime;
+      if (sasthiDelta <= 0) {
+        document.getElementById('sasthiDays').textContent = '০০';
+        document.getElementById('sasthiHours').textContent = '০০';
+        document.getElementById('sasthiMinutes').textContent = '০০';
+        document.getElementById('sasthiSeconds').textContent = '০০';
+        document.getElementById('sasthiBadge').innerHTML = 
+          '<span class="text-festiveGold font-bold">🎉 শুভ মহাষষ্ঠী! দেবী মা এসে গেছেন আমাদের মাঝে!</span>';
+      } else {
+        const d = Math.floor(sasthiDelta / (1000 * 60 * 60 * 24));
+        const h = Math.floor((sasthiDelta % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((sasthiDelta % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((sasthiDelta % (1000 * 60)) / 1000);
+
+        document.getElementById('sasthiDays').textContent = toBengaliNumber(d);
+        document.getElementById('sasthiHours').textContent = toBengaliNumber(h);
+        document.getElementById('sasthiMinutes').textContent = toBengaliNumber(m);
+        document.getElementById('sasthiSeconds').textContent = toBengaliNumber(s);
+      }
+
+      // Dashami
+      const dashamiDelta = TARGET_DASHAMI - currentTime;
+      if (dashamiDelta <= 0) {
+        document.getElementById('dashamiDays').textContent = '০০';
+        document.getElementById('dashamiHours').textContent = '০০';
+        document.getElementById('dashamiMinutes').textContent = '০০';
+        document.getElementById('dashamiSeconds').textContent = '০০';
+        document.getElementById('dashamiBadge').innerHTML = 
+          '<span class="text-red-300 font-bold">🌾 শুভ বিজয়া! আসছে বছর আবার হবে!</span>';
+      } else {
+        const d = Math.floor(dashamiDelta / (1000 * 60 * 60 * 24));
+        const h = Math.floor((dashamiDelta % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((dashamiDelta % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((dashamiDelta % (1000 * 60)) / 1000);
+
+        document.getElementById('dashamiDays').textContent = toBengaliNumber(d);
+        document.getElementById('dashamiHours').textContent = toBengaliNumber(h);
+        document.getElementById('dashamiMinutes').textContent = toBengaliNumber(m);
+        document.getElementById('dashamiSeconds').textContent = toBengaliNumber(s);
+      }
+    }
+
+    setInterval(runCountdownTick, 1000);
+    runCountdownTick();
+
+    /* ==========================================================================
+       3. Pandals Directory Logic (Handwritten Look)
+       ========================================================================== */
+    let activeZone = 'all';
+
+    function renderPandalsList(items) {
+      const container = document.getElementById('pandalsListContainer');
+      container.innerHTML = '';
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full text-center py-8 bg-cherry-950/70 rounded-2xl border border-festiveGold/30">
+            <p class="font-hand text-amber-200 text-base">কোনো পুজো খুঁজে পাওয়া গেল না!</p>
+          </div>
+        `;
+        return;
+      }
+
+      items.forEach(p => {
+        const card = document.createElement('div');
+        card.className = "paper-note p-4 sm:p-5 flex flex-col justify-between space-y-3";
+        card.innerHTML = `
+          <div class="space-y-2">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-xs font-hand px-2.5 py-0.5 rounded-full bg-cherry-950 text-festiveGold border border-festiveGold/40">
+                ${p.zoneText}
+              </span>
+              <span class="text-xs text-amber-300 font-hand font-bold">#${toBengaliNumber(p.id)}</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold font-hand text-festiveGold hover:text-white transition">
+              ${p.name}
+            </h3>
+            <p class="text-xs font-hand text-amber-200/80 flex items-center gap-1.5">
+              <i class="fa-solid fa-location-dot text-sindoorRed"></i> ${p.location}
+            </p>
+            <p class="text-sm font-hand text-gray-200 leading-relaxed pt-1">
+              ${p.bibiron}
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-festiveGold/20 flex items-center justify-between gap-2">
+            <span class="text-xs text-amber-300 font-hand italic">
+              ✨ ${p.specialty}
+            </span>
+            <a 
+              href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.mapLocation)}" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="px-2.5 py-1 rounded-lg bg-cherry-950 text-festiveGold text-xs font-hand hover:bg-festiveGold hover:text-cherry-950 transition border border-festiveGold/40 flex items-center gap-1 shrink-0"
+            >
+              <i class="fa-solid fa-diamond-turn-right"></i> ম্যাপ
+            </a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function applyZoneFilter(zoneKey) {
+      activeZone = zoneKey;
+      document.querySelectorAll('.zone-pill').forEach(btn => {
+        if (btn.getAttribute('data-zone') === zoneKey) {
+          btn.classList.add('bg-festiveGold', 'text-cherry-950', 'font-bold');
+          btn.classList.remove('bg-cherry-950', 'text-amber-200');
+        } else {
+          btn.classList.remove('bg-festiveGold', 'text-cherry-950', 'font-bold');
+          btn.classList.add('bg-cherry-950', 'text-amber-200');
+        }
+      });
+      handlePandalSearch();
+    }
+
+    function handlePandalSearch() {
+      const query = document.getElementById('pandalSearchInput').value.toLowerCase().trim();
+      const filtered = TOP_20_PUJAS.filter(p => {
+        const matchesZone = (activeZone === 'all') || (p.zone === activeZone);
+        const matchesQuery = 
+          p.name.toLowerCase().includes(query) || 
+          p.location.toLowerCase().includes(query) || 
+          p.bibiron.toLowerCase().includes(query);
+        return matchesZone && matchesQuery;
+      });
+      renderPandalsList(filtered);
+    }
+
+    renderPandalsList(TOP_20_PUJAS);
+
+    /* ==========================================================================
+       4. Dhak Web Audio Synthesizer + Fallback dhak.mp3
+       ========================================================================== */
+    let audioContext = null;
+    let isPlayingDhak = false;
+    let dhakTimerLoop = null;
+    let stepIndex = 0;
+
+    // Authentic 16-beat traditional Bengali Dhak pattern
+    const BOL_PATTERN = [2, 1, 1, 0,  2, 1, 1, 0,  1, 2, 1, 1,  2, 2, 1, 0];
+
+    function playSyntheticDhakHit(type) {
+      if (!audioContext) return;
+      const t = audioContext.currentTime;
+
+      if (type === 2) {
+        // Deep Bayan (Ghom) skin sound
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(145, t);
+        osc.frequency.exponentialRampToValueAtTime(42, t + 0.2);
+
+        gain.gain.setValueAtTime(0.75, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+
+        osc.connect(gain);
+        gain.connect(audioContext.destination);
+        osc.start(t);
+        osc.stop(t + 0.25);
+      } else if (type === 1) {
+        // Kathi sharp rim strike
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(490, t);
+        osc.frequency.exponentialRampToValueAtTime(160, t + 0.08);
+
+        gain.gain.setValueAtTime(0.55, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.09);
+
+        osc.connect(gain);
+        gain.connect(audioContext.destination);
+        osc.start(t);
+        osc.stop(t + 0.1);
+      }
+    }
+
+    function startDhakRhythmPlayback() {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+
+      // Fallback try for dhak.mp3
+      const audioElem = document.getElementById('localDhakAudio');
+      if (audioElem) {
+        audioElem.play().catch(() => {});
+      }
+
+      stepIndex = 0;
+      clearInterval(dhakTimerLoop);
+      dhakTimerLoop = setInterval(() => {
+        const hit = BOL_PATTERN[stepIndex];
+        if (hit > 0) playSyntheticDhakHit(hit);
+        stepIndex = (stepIndex + 1) % BOL_PATTERN.length;
+      }, 145);
+    }
+
+    function stopDhakRhythmPlayback() {
+      clearInterval(dhakTimerLoop);
+      const audioElem = document.getElementById('localDhakAudio');
+      if (audioElem) audioElem.pause();
+    }
+
+    function toggleDhakSystem() {
+      isPlayingDhak = !isPlayingDhak;
+      const modal = document.getElementById('dhakBackdropModal');
+      const icon = document.getElementById('dhakBtnIcon');
+      const modalBtn = document.getElementById('dhakModalPlayBtn');
+
+      if (isPlayingDhak) {
+        startDhakRhythmPlayback();
+        icon.className = "fa-solid fa-volume-high text-red-950";
+        modalBtn.innerHTML = '<i class="fa-solid fa-pause"></i> থামান';
+        modal.classList.remove('hidden');
+      } else {
+        stopDhakRhythmPlayback();
+        icon.className = "fa-solid fa-music";
+        modalBtn.innerHTML = '<i class="fa-solid fa-play"></i> বাজান';
+      }
+    }
+
+    function closeDhakModal() {
+      document.getElementById('dhakBackdropModal').classList.add('hidden');
+    }
+
+    /* ==========================================================================
+       5. Interactive Handwritten Bengali Comments System (Edit, Like, Pin)
+       ========================================================================== */
+    let commentsData = [
+      {
+        id: 201,
+        author: "অনির্বাণ মুখার্জি",
+        message: "এবার ষষ্ঠীতে বন্ধুদের সাথে বাগবাজার আর কলেজ স্কয়ারের ঠাকুর দেখা মাস্ট!",
+        time: "আজ বিকেল",
+        likes: 19,
+        dislikes: 0,
+        isPinned: true,
+        isSelf: false
+      },
+      {
+        id: 202,
+        author: "সৌভিক দত্ত",
+        message: "বিজয়ার মন খারাপ যতই থাকুক, ঢাকের আওয়াজে শরীর আপনা থেকেই নেচে ওঠে!",
+        time: "সন্ধ্যা ৬:১০",
+        likes: 14,
+        dislikes: 1,
+        isPinned: false,
+        isSelf: false
+      }
+    ];
+
+    let isAdminActive = false;
+    let editingId = null;
+
+    try {
+      const stored = localStorage.getItem('durga_handwritten_comments');
+      if (stored) commentsData = JSON.parse(stored);
+    } catch(e) {}
+
+    function persistComments() {
+      try {
+        localStorage.setItem('durga_handwritten_comments', JSON.stringify(commentsData));
+      } catch(e) {}
+    }
+
+    function toggleAdminPinMode() {
+      isAdminActive = !isAdminActive;
+      const label = document.getElementById('adminModeLabel');
+      const btn = document.getElementById('adminToggleBtn');
+      if (isAdminActive) {
+        label.textContent = "এডমিন মোড চালু";
+        btn.classList.add('bg-festiveGold', 'text-cherry-950');
+      } else {
+        label.textContent = "ইউজার মোড";
+        btn.classList.remove('bg-festiveGold', 'text-cherry-950');
+      }
+      renderCommentsList();
+    }
+
+    function toggleCommentSidePanel() {
+      const drawer = document.getElementById('commentSideDrawer');
+      drawer.classList.toggle('translate-x-full');
+    }
+
+    function renderCommentsList() {
+      const listContainer = document.getElementById('commentsListView');
+      listContainer.innerHTML = '';
+      document.getElementById('commentCountBadge').textContent = toBengaliNumber(commentsData.length);
+
+      // Pinned items stay on top
+      const sorted = [...commentsData].sort((a, b) => (b.isPinned ? 1 : 0) - (a.isPinned ? 1 : 0));
+
+      sorted.forEach(c => {
+        const card = document.createElement('div');
+        card.className = `p-3.5 rounded-2xl border text-sm space-y-2 relative transition ${
+          c.isPinned 
+            ? 'bg-cherry-900/90 border-festiveGold shadow-lg ring-1 ring-festiveGold/40' 
+            : 'bg-cherry-950/80 border-festiveGold/20'
+        }`;
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-full bg-festiveGold text-cherry-950 font-bold font-hand flex items-center justify-center text-xs">
+                ${c.author.charAt(0) || 'ম'}
+              </div>
+              <div>
+                <span class="font-bold text-festiveGold font-hand">${c.author}</span>
+                ${c.isSelf ? '<span class="text-[10px] bg-cherry-700 text-amber-200 px-1.5 py-0.2 rounded ml-1 font-hand">আপনি</span>' : ''}
+              </div>
+            </div>
+            <div class="flex items-center gap-1.5">
+              ${c.isPinned ? '<span class="text-festiveGold text-[11px] font-hand font-bold flex items-center gap-1 bg-cherry-950 px-2 py-0.5 rounded-full border border-festiveGold/50"><i class="fa-solid fa-thumbtack"></i> পিন</span>' : ''}
+              <span class="text-[11px] text-amber-200/50 font-hand">${c.time}</span>
+            </div>
+          </div>
+
+          <p class="text-amber-100 font-hand text-sm leading-relaxed">
+            ${c.message}
+          </p>
+
+          <div class="flex items-center justify-between pt-1 border-t border-festiveGold/15">
+            <div class="flex items-center gap-3">
+              <button onclick="handleCommentLike(${c.id})" class="text-amber-200/80 hover:text-festiveGold flex items-center gap-1 text-xs font-hand transition">
+                <i class="fa-regular fa-thumbs-up"></i> <span>${toBengaliNumber(c.likes)}</span>
+              </button>
+              <button onclick="handleCommentDislike(${c.id})" class="text-amber-200/80 hover:text-sindoorRed flex items-center gap-1 text-xs font-hand transition">
+                <i class="fa-regular fa-thumbs-down"></i> <span>${toBengaliNumber(c.dislikes)}</span>
+              </button>
+            </div>
+
+            <div class="flex items-center gap-2">
+              ${c.isSelf ? `
+                <button onclick="beginEditComment(${c.id})" class="text-amber-300 hover:text-white text-xs font-hand flex items-center gap-1">
+                  <i class="fa-solid fa-pen"></i> এডিট
+                </button>
+              ` : ''}
+
+              ${isAdminActive ? `
+                <button onclick="togglePinCommentStatus(${c.id})" class="text-festiveGold hover:underline text-xs font-hand flex items-center gap-1">
+                  <i class="fa-solid fa-thumbtack"></i> ${c.isPinned ? 'আনপিন' : 'পিন'}
+                </button>
+              ` : ''}
+            </div>
+          </div>
+        `;
+        listContainer.appendChild(card);
+      });
+    }
+
+    function submitCommentEntry() {
+      const nameInput = document.getElementById('commentWriterName');
+      const msgInput = document.getElementById('commentMessageBody');
+      const author = nameInput.value.trim() || 'শারদ ভক্ত';
+      const text = msgInput.value.trim();
+
+      if (!text) return;
+
+      if (editingId) {
+        const item = commentsData.find(c => c.id === editingId);
+        if (item && item.isSelf) {
+          item.message = text;
+          item.author = author;
+        }
+        editingId = null;
+        document.getElementById('postCommentBtn').textContent = 'লিখে ফেলুন';
+      } else {
+        const entry = {
+          id: Date.now(),
+          author: author,
+          message: text,
+          time: "এইমাত্র",
+          likes: 0,
+          dislikes: 0,
+          isPinned: false,
+          isSelf: true
+        };
+        commentsData.unshift(entry);
+      }
+
+      msgInput.value = '';
+      persistComments();
+      renderCommentsList();
+    }
+
+    function beginEditComment(id) {
+      const item = commentsData.find(c => c.id === id);
+      if (!item) return;
+      editingId = id;
+      document.getElementById('commentWriterName').value = item.author;
+      document.getElementById('commentMessageBody').value = item.message;
+      document.getElementById('commentMessageBody').focus();
+      document.getElementById('postCommentBtn').textContent = 'সংশোধন করুন';
+    }
+
+    function handleCommentLike(id) {
+      const item = commentsData.find(c => c.id === id);
+      if (item) {
+        item.likes += 1;
+        persistComments();
+        renderCommentsList();
+      }
+    }
+
+    function handleCommentDislike(id) {
+      const item = commentsData.find(c => c.id === id);
+      if (item) {
+        item.dislikes += 1;
+        persistComments();
+        renderCommentsList();
+      }
+    }
+
+    function togglePinCommentStatus(id) {
+      const item = commentsData.find(c => c.id === id);
+      if (item) {
+        item.isPinned = !item.isPinned;
+        persistComments();
+        renderCommentsList();
+      }
+    }
+
+    renderCommentsList();
+
+    /* ==========================================================================
+       6. Subtle Kashphul & Light Particle Background Animation
+       ========================================================================== */
+    const canvas = document.getElementById('kashCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function setupCanvasSize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', setupCanvasSize);
+    setupCanvasSize();
+
+    class KashParticle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.radius = Math.random() * 2 + 1;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = Math.random() * 0.7 + 0.2;
+        this.alpha = Math.random() * 0.5 + 0.2;
+      }
+      step() {
+        this.y += this.vy;
+        this.x += Math.sin(this.y * 0.02) * 0.4 + this.vx;
+        if (this.y > canvas.height) {
+          this.y = -10;
+          this.x = Math.random() * canvas.width;
+        }
+      }
+      paint() {
+        ctx.fillStyle = `rgba(255, 235, 190, ${this.alpha})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 35; i++) {
+      particles.push(new KashParticle());
+    }
+
+    function renderLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.step();
+        p.paint();
+      });
+      requestAnimationFrame(renderLoop);
+    }
+    renderLoop();
+  </script>
+</body>
+</html>
